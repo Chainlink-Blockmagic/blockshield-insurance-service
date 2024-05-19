@@ -2,7 +2,7 @@ services:
   mongodb:
     image: mongo:7.0.2
     environment:
-    - MONGO_INITDB_DATABASE=nfe-service
+    - MONGO_INITDB_DATABASE=blockshield-insurance-service
     command:
     - --replSet
     - rs0

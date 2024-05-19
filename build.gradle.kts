@@ -9,7 +9,7 @@ plugins {
     kotlin("plugin.allopen") version "1.8.22"
 }
 
-group = "br.com.i3focus.nfe"
+group = "com.blockshield.insurance.service"
 version = "1.0.0"
 
 java.sourceCompatibility = JavaVersion.VERSION_17
