@@ -16,7 +16,7 @@ class AssetService(private val assetRepository: AssetRepository) {
 
     fun findAll(pageable: Pageable, onlyActive: Boolean = false): List<AssetDto> {
         val assets = if (onlyActive) {
-            assetRepository.findAllActive(pageable)
+            assetRepository.findByActiveIsTrue(pageable)
         } else {
             assetRepository.findAll(pageable)
         }
