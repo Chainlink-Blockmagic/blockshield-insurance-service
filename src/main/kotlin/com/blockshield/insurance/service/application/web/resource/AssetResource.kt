@@ -2,9 +2,12 @@ package com.blockshield.insurance.service.application.web.resource
 
 import com.blockshield.insurance.service.application.web.dto.request.AssetCreateRequest
 import com.blockshield.insurance.service.application.web.dto.request.AssetUpdateRequest
+import com.blockshield.insurance.service.application.web.dto.response.AssetActiveValidateResponse
+import com.blockshield.insurance.service.application.web.dto.response.AssetByWalletResponse
 import com.blockshield.insurance.service.application.web.dto.response.AssetCreatedResponse
 import com.blockshield.insurance.service.domain.asset.AssetService
 import com.blockshield.insurance.service.domain.asset.entity.dto.AssetDto
+import com.blockshield.insurance.service.domain.transaction.TransactionService
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
@@ -21,7 +24,10 @@ import java.util.*
     value = ["/api/v1/assets"],
     produces = [MediaType.APPLICATION_JSON_VALUE]
 )
-class AssetResource(private val assetService: AssetService) {
+class AssetResource(
+    private val assetService: AssetService,
+    private val transactionService: TransactionService
+) {
 
     @GetMapping
     fun getAllAssets(
@@ -49,6 +55,12 @@ class AssetResource(private val assetService: AssetService) {
     fun getAssetById(@PathVariable(name = "id") id: UUID): ResponseEntity<AssetDto> =
         ResponseEntity.ok(assetService.get(id))
 
+    @GetMapping("/{initial}/settled")
+    fun getAssetById(@PathVariable(name = "initial") initial: String): ResponseEntity<AssetActiveValidateResponse> =
+        ResponseEntity.ok(
+            AssetActiveValidateResponse(assetService.getByInitial(initial).isSettled())
+        )
+
     @GetMapping("/wallet/{wallet}")
     fun getAssetsByWallet(
         @PageableDefault(
@@ -58,9 +70,13 @@ class AssetResource(private val assetService: AssetService) {
             direction = Sort.Direction.DESC
         )
         pageable: Pageable,
-        @PathVariable(name = "ncm") ncm: Long
-    ): ResponseEntity<List<AssetDto>> =
-        ResponseEntity.ok(emptyList())
+        @PathVariable(name = "wallet") wallet: String
+    ): ResponseEntity<List<AssetByWalletResponse>> =
+        transactionService.getByWallet(wallet, pageable).map {
+            AssetByWalletResponse.from(it)
+        }.let {
+            ResponseEntity.ok(it)
+        }
 
     @PostMapping
     @ApiResponse(responseCode = "201")

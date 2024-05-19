@@ -23,8 +23,14 @@ spring:
       uuid-representation: standard
       auto-index-creation: true
   task:
+    execution:
+      thread-name-prefix: blockshield-insurance-task-
+      pool:
+        core-size: 4
+        max-size: 80
+        queue-capacity: 10_000
     scheduling:
-      thread-name-prefix: nfe-service-scheduling-
+      thread-name-prefix: blockshield-insurance-scheduling-
       pool:
         size: 10
 #  docker:

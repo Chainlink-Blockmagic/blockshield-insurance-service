@@ -15,4 +15,6 @@ data class AssetDto(
     val price: Price,
     val createdAt: OffsetDateTime? = null,
     val updatedAt: OffsetDateTime? = null
-)
+) {
+    fun isSettled() = this.active
+}

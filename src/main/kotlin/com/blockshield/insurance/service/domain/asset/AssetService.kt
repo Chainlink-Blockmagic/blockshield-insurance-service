@@ -28,10 +28,19 @@ class AssetService(private val assetRepository: AssetRepository) {
         .map { nfe -> dtoMapper.mapFrom(nfe, ASSET_NULL) }
         .orElseThrow { NotFoundException("Asset for $id does not exists!") }
 
+    fun getByInitial(initial: String): AssetDto = assetRepository.findByInitial(initial)
+        .orElseThrow { NotFoundException("Asset for initial [ $initial ] does not exists!") }
+        .let { dtoMapper.mapFrom(it, ASSET_NULL) }
+
     fun inactivate(id: UUID) = assetRepository.findById(id)
         .orElseThrow { NotFoundException("Asset for $id does not exists!") }
-        .let { assetRepository.save(it.inactivate()) }
-
+        .let {
+            assetRepository.save(
+                it
+                    .inactivate()
+                    .updateAt()
+            )
+        }
 
     fun create(assetDto: AssetDto): UUID {
         val asset = entityMapper.mapFrom(assetDto, ASSET_NULL)
@@ -43,7 +52,7 @@ class AssetService(private val assetRepository: AssetRepository) {
             .orElseThrow { NotFoundException("Asset for $id does not exists!") }
 
         entityMapper.mapFrom(assetDto, asset).run {
-            assetRepository.save(this)
+            assetRepository.save(this.updateAt())
         }
     }
 

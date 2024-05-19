@@ -1,6 +1,6 @@
-package com.blockshield.insurance.service.domain.asset.entity
+package com.blockshield.insurance.service.domain.transaction.entity
 
-import com.blockshield.insurance.service.domain.asset.entity.dto.Price
+import com.blockshield.insurance.service.domain.transaction.entity.dto.AssetTransaction
 import jakarta.validation.constraints.NotNull
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
@@ -8,40 +8,26 @@ import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.annotation.Version
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
-import java.io.Serializable
 import java.time.OffsetDateTime
 import java.util.*
 
-@Document("assets")
-class Asset : Serializable {
+@Document("transactions")
+class Transaction {
 
     @Id
     @Indexed
     var id: UUID? = null
 
     @NotNull
-    var name: String? = null
-
-    @NotNull
     @Indexed(unique = true)
-    var initial: String? = null
+    var hash: String? = null
 
     @NotNull
-    var rating: Double? = null
-
-    @NotNull
-    var description: String? = null
-
     @Indexed
-    var active: Boolean? = false
+    var wallet: String? = null
 
     @NotNull
-    var totalSupply: Long? = null
-
-    var currentSupply: Long? = null
-
-    @NotNull
-    var price: Price? = null
+    var assetTransaction: AssetTransaction? = null
 
     @CreatedDate
     var createdAt: OffsetDateTime? = null
@@ -52,7 +38,16 @@ class Asset : Serializable {
     @Version
     var version: Int? = null
 
-    fun inactivate() = this.apply { this.active = false }
+    fun uuid(id: UUID? = UUID.randomUUID()) = this.apply { this.id = id }
+
+    fun hash(hash: String) = this.apply { this.hash = hash }
+
+    fun wallet(wallet: String) = this.apply { this.wallet = wallet }
+
+    fun assetTransaction(assetTransaction: AssetTransaction) =
+        this.apply { this.assetTransaction = assetTransaction }
+
+    fun createdAt() = this.apply { this.createdAt = OffsetDateTime.now() }
 
     fun updateAt() = this.apply { this.updatedAt = OffsetDateTime.now() }
 }
