@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -jar build/libs/nfe-service-1.0.0.jar --server.port=$PORT

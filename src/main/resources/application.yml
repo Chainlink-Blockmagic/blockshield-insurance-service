@@ -1,0 +1,50 @@
+---
+
+server:
+  port: 7000
+  shutdown: graceful
+  http2:
+    enabled: true
+
+spring:
+  devtools:
+    add-properties: false
+  application:
+    name: nfe
+  config:
+    import:
+      - classpath:app.yml
+      - optional:file:./environments.properties
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  data:
+    mongodb:
+      uri: ${MONGODB_DATABASE_URL}
+      uuid-representation: standard
+      auto-index-creation: true
+  task:
+    scheduling:
+      thread-name-prefix: nfe-service-scheduling-
+      pool:
+        size: 10
+#  docker:
+#    compose:
+#      lifecycle-management: START_AND_STOP
+
+management:
+  endpoint:
+    info:
+      enabled: true
+
+springdoc:
+  pathsToMatch: /v1/api/**
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+    root: INFO
