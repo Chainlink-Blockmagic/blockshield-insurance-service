@@ -37,7 +37,7 @@ management:
       enabled: true
 
 springdoc:
-  pathsToMatch: /v1/api/**
+  pathsToMatch: /api/v1/**
 
 logging:
   level:
