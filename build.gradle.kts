@@ -32,6 +32,9 @@ dependencies {
     implementation("jakarta.validation:jakarta.validation-api")
     implementation("net.datafaker:datafaker:2.0.2")
 
+    // Web3j
+    implementation("org.web3j.eth2:beacon-node-api:1.0.0")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 //    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 
