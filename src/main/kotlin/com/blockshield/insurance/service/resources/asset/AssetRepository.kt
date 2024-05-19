@@ -7,6 +7,6 @@ import java.util.*
 
 interface AssetRepository : MongoRepository<Asset, UUID> {
 
-    fun findAllActive(pageable: Pageable): List<Asset>
+    fun findByActiveIsTrue(pageable: Pageable): List<Asset>
 
 }
