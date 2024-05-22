@@ -6,7 +6,7 @@ import java.util.*
 
 data class AssetTransaction(
     val id: UUID,
-    val initial: String,
+    val symbol: String,
     val quantity: Int
 ) {
     private var amount: BigDecimal? = BigDecimal.ZERO

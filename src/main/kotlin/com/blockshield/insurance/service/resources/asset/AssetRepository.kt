@@ -7,7 +7,7 @@ import java.util.*
 
 interface AssetRepository : MongoRepository<Asset, UUID> {
 
-    fun findByInitial(initial: String): Optional<Asset>
+    fun findBySymbol(symbol: String): Optional<Asset>
 
     fun findByActiveIsTrue(pageable: Pageable): List<Asset>
 

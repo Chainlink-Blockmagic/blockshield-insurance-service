@@ -10,13 +10,17 @@ class AssetDtoMapper : Mapper<Asset, AssetDto> {
         id = input.id,
         name = input.name!!,
         description = input.description!!,
-        initial = input.initial!!,
+        observation = input.observation!!,
+        symbol = input.symbol!!,
         rating = input.rating!!,
         active = input.active!!,
-        currentSupply = input.currentSupply,
+        tokenizationPlatform = input.tokenizationPlatform!!,
+        remainingSupply = input.remainingSupply,
         totalSupply = input.totalSupply!!,
+        totalValue = input.totalValue(),
         price = input.price!!,
+        dueDate = input.dueDate!!,
         createdAt = input.createdAt,
-        updatedAt = input.updatedAt
+        updatedAt = input.updatedAt,
     )
 }

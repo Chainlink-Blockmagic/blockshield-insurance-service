@@ -5,6 +5,7 @@ import java.math.BigDecimal
 
 data class Price(
     val unitaryValue: BigDecimal,
+    val yield: BigDecimal,
     val currency: CurrencyType,
     val validity: Validity
 )

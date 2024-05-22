@@ -31,6 +31,12 @@ class AssetResource(
 
     @GetMapping
     fun getAllAssets(
+        @RequestParam(
+            name = "onlyActive",
+            required = false,
+            defaultValue = "false"
+        )
+        onlyActive: Boolean,
         @PageableDefault(
             size = 30,
             page = 0,
@@ -38,27 +44,16 @@ class AssetResource(
             direction = Sort.Direction.DESC
         )
         pageable: Pageable
-    ): ResponseEntity<List<AssetDto>> = ResponseEntity.ok(assetService.findAll(pageable))
-
-    @GetMapping("/active-only")
-    fun getAllActiveAssets(
-        @PageableDefault(
-            size = 30,
-            page = 0,
-            sort = ["createdAt"],
-            direction = Sort.Direction.DESC
-        )
-        pageable: Pageable
-    ): ResponseEntity<List<AssetDto>> = ResponseEntity.ok(assetService.findAll(pageable, onlyActive = true))
+    ): ResponseEntity<List<AssetDto>> = ResponseEntity.ok(assetService.findAll(pageable, onlyActive = onlyActive))
 
     @GetMapping("/{id}")
     fun getAssetById(@PathVariable(name = "id") id: UUID): ResponseEntity<AssetDto> =
         ResponseEntity.ok(assetService.get(id))
 
-    @GetMapping("/{initial}/settled")
-    fun getAssetById(@PathVariable(name = "initial") initial: String): ResponseEntity<AssetActiveValidateResponse> =
+    @GetMapping("/{symbol}/settled")
+    fun getAssetById(@PathVariable(name = "symbol") symbol: String): ResponseEntity<AssetActiveValidateResponse> =
         ResponseEntity.ok(
-            AssetActiveValidateResponse(assetService.getByInitial(initial).isSettled())
+            AssetActiveValidateResponse(assetService.getBySymbol(symbol.uppercase()).isSettled())
         )
 
     @GetMapping("/wallet/{wallet}")

@@ -2,23 +2,41 @@ package com.blockshield.insurance.service.application.web.dto.request
 
 import com.blockshield.insurance.service.domain.asset.entity.dto.AssetDto
 import com.blockshield.insurance.service.domain.asset.entity.dto.Price
+import jakarta.validation.constraints.NotNull
+import org.springframework.format.annotation.DateTimeFormat
+import java.time.LocalDate
 
 data class AssetCreateRequest(
+    @NotNull
     val name: String,
-    val initial: String,
-    val rating: Double,
+    @NotNull
+    val symbol: String,
+    @NotNull
+    val rating: String,
+    @NotNull
     val description: String,
-    val active: Boolean,
+    @NotNull
+    val observation: String,
+    @NotNull
+    val tokenizationPlatform: String,
+    val active: Boolean = false,
+    @NotNull
     val totalSupply: Long,
-    val price: Price
+    @NotNull
+    val price: Price,
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    val dueDate: LocalDate,
 ) {
     fun toAssetDto() = AssetDto(
         name = name,
         description = description,
-        initial = initial,
+        observation = observation,
+        symbol = symbol.uppercase(),
+        tokenizationPlatform = tokenizationPlatform.uppercase(),
         rating = rating,
         active = active,
         totalSupply = totalSupply,
         price = price,
+        dueDate = dueDate,
     )
 }

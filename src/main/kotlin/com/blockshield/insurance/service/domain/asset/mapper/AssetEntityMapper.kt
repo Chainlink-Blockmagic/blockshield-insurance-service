@@ -13,24 +13,30 @@ class AssetEntityMapper : Mapper<AssetDto, Asset> {
             this.id = input.id ?: this.id
             this.name = input.name
             this.description = input.description
-            this.initial = input.initial
+            this.observation = input.observation
+            this.symbol = input.symbol
             this.rating = input.rating
             this.active = input.active
             this.price = input.price
-            this.currentSupply = input.currentSupply ?: this.currentSupply
+            this.remainingSupply = input.remainingSupply ?: this.remainingSupply
+            this.tokenizationPlatform = input.tokenizationPlatform
             this.totalSupply = input.totalSupply
+            this.dueDate = input.dueDate
             this.createdAt = input.createdAt ?: this.createdAt
             this.updatedAt = input.updatedAt ?: this.updatedAt
         } ?: Asset().apply {
             this.id = UUID.randomUUID()
             this.name = input.name
             this.description = input.description
-            this.initial = input.initial
+            this.observation = input.observation
+            this.symbol = input.symbol
             this.rating = input.rating
             this.active = input.active
             this.price = input.price
-            this.currentSupply = input.totalSupply
+            this.remainingSupply = input.remainingSupply ?: this.remainingSupply
+            this.tokenizationPlatform = input.tokenizationPlatform
             this.totalSupply = input.totalSupply
+            this.dueDate = input.dueDate
             this.createdAt = OffsetDateTime.now()
             this.updatedAt = OffsetDateTime.now()
         }

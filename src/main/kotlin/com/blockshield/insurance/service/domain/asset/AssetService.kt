@@ -28,8 +28,8 @@ class AssetService(private val assetRepository: AssetRepository) {
         .map { nfe -> dtoMapper.mapFrom(nfe, ASSET_NULL) }
         .orElseThrow { NotFoundException("Asset for $id does not exists!") }
 
-    fun getByInitial(initial: String): AssetDto = assetRepository.findByInitial(initial)
-        .orElseThrow { NotFoundException("Asset for initial [ $initial ] does not exists!") }
+    fun getBySymbol(symbol: String): AssetDto = assetRepository.findBySymbol(symbol)
+        .orElseThrow { NotFoundException("Asset for symbol [ $symbol ] does not exists!") }
         .let { dtoMapper.mapFrom(it, ASSET_NULL) }
 
     fun inactivate(id: UUID) = assetRepository.findById(id)

@@ -37,12 +37,6 @@ spring:
 #    compose:
 #      lifecycle-management: START_AND_STOP
 
-app:
-  node:
-    client: ${NODE_CLIENT_HOST}
-    websocket: ${NODE_WEBSOCKET_HOST}
-    api-key: ${NODE_API_KEY}
-
 management:
   endpoint:
     info:
