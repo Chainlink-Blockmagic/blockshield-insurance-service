@@ -22,5 +22,5 @@ data class AssetDto(
     val createdAt: OffsetDateTime? = null,
     val updatedAt: OffsetDateTime? = null
 ) {
-    fun isSettled() = this.active
+    fun isSettled() = !this.active
 }

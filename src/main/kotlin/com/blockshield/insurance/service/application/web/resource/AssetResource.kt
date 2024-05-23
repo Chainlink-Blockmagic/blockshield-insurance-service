@@ -33,8 +33,7 @@ class AssetResource(
     fun getAllAssets(
         @RequestParam(
             name = "onlyActive",
-            required = false,
-            defaultValue = "false"
+            required = false
         )
         onlyActive: Boolean,
         @PageableDefault(
