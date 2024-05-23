@@ -104,7 +104,18 @@ curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.co
 
 ### Create Transactions
 ```shell
-curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/assets'
+curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/transactions' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data '{
+    "hash": "0x7124e651b10dc00fa7b24b3931141e77a0f3f14caf0a0f4fb477dc43872fc355",
+    "wallet": "0xE5435Db2b26a59083788cA861e7f86CF7338CF64",
+    "assetTransaction": {
+        "id": "ab9b9a10-a868-4f41-86d7-bbcb640e163f",
+        "symbol": "Precatorio2026",
+        "quantity": 100
+    }
+}'
 ```
 
 ## Further readings
