@@ -38,6 +38,75 @@ gradlew bootBuildImage --imageName=br.com.i3focus.nfe/nfe-service
 ## Running on Heroku
 https://www.tabnews.com.br/jjeanjacques10/spring-boot-microservices-monorepo-heroku
 
+## Requests
+
+### Get Assets
+```shell
+curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/assets'
+```
+
+### Get Only Active Assets 
+```shell
+curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/assets?activeOnly=true'
+```
+
+### Get Assets By Wallet
+```shell
+curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/assets/wallet/0xE5435Db2b26a59083788cA861e7f86CF7338CF64'
+```
+
+### Get Assets By ID
+```shell
+curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/assets/ab9b9a10-a868-4f41-86d7-bbcb640e163f'
+```
+
+### Validating if Asset Is Settled
+```shell
+curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/assets/PRECATORIO2024/settled'
+```
+
+### Inactivate Assets
+```shell
+curl --location --request PATCH 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/assets/8a7f62f0-ad94-4493-966e-f47745eee457/inactivate'
+```
+
+### Create Assets
+```shell
+curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/assets' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Precatorio2024",
+    "symbol": "Precatorio2024",
+    "rating": "AA",
+    "description": "Precatório de 2024",
+    "observation": "Em caso de falha de liquidação o valor pago será o total investido menos o valor do seguro.",
+    "tokenizationPlatform": "MB",
+    "active": true,
+    "totalSupply": 1000000,
+    "price": {
+        "unitaryValue": 100.00,
+        "yield": "15",
+        "currency": "BRL",
+        "validity": {
+            "from": "2024-05-22T00:00:00-03:00",
+            "until": "2024-06-22T23:59:59-03:00"
+        }
+    },
+    "dueDate": "2024-06-22"
+}'
+```
+
+### Get Transactions By Wallet
+```shell
+curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/transactions/wallet/0xE5435Db2b26a59083788cA861e7f86CF7338CF64'
+```
+
+### Create Transactions
+```shell
+curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/assets'
+```
+
 ## Further readings
 
 * [Gradle user manual](https://docs.gradle.org/)  
