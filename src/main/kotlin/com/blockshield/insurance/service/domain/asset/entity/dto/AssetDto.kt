@@ -16,11 +16,25 @@ data class AssetDto(
     val active: Boolean,
     val totalSupply: Long,
     val totalValue: BigDecimal = BigDecimal.ZERO,
-    val remainingSupply: Long? = null,
     val price: Price,
     val dueDate: LocalDate,
+    val insuranceTokenAddress: String? = "",
     val createdAt: OffsetDateTime? = null,
     val updatedAt: OffsetDateTime? = null
 ) {
+    var remainingSupply: Long? = null
+
     fun isSettled() = !this.active
+
+    fun remainingSupply(value: Long) = this.apply { this.remainingSupply = value }
+
+    fun getRemainingSupply() = this.remainingSupply
+
+    fun updateRemainingSupply(quantity: Int) = this.apply {
+        this.remainingSupply = quantity + (remainingSupply ?: MIN_REMAINING_VALUE)
+    }
+
+    companion object {
+        private const val MIN_REMAINING_VALUE = 0L
+    }
 }

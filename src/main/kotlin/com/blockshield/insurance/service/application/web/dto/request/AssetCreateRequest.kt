@@ -19,6 +19,8 @@ data class AssetCreateRequest(
     val observation: String,
     @NotNull
     val tokenizationPlatform: String,
+    @NotNull
+    val insuranceTokenAddress: String,
     val active: Boolean = false,
     @NotNull
     val totalSupply: Long,
@@ -38,5 +40,6 @@ data class AssetCreateRequest(
         totalSupply = totalSupply,
         price = price,
         dueDate = dueDate,
+        insuranceTokenAddress = insuranceTokenAddress
     )
 }

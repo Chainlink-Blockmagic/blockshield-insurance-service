@@ -55,6 +55,10 @@ class Asset : Serializable {
     @NotNull
     var dueDate: LocalDate? = null
 
+    @NotNull
+    @Indexed
+    var insuranceTokenAddress: String? = null
+
     @CreatedDate
     var createdAt: OffsetDateTime? = null
 

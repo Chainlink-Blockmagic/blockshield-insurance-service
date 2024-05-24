@@ -12,6 +12,7 @@ data class AssetUpdateRequest(
     val description: String,
     val observation: String,
     val tokenizationPlatform: String,
+    val insuranceTokenAddress: String,
     val active: Boolean,
     val totalSupply: Long,
     val price: Price,
@@ -29,5 +30,6 @@ data class AssetUpdateRequest(
         totalSupply = totalSupply,
         price = price,
         dueDate = dueDate,
+        insuranceTokenAddress = insuranceTokenAddress
     )
 }

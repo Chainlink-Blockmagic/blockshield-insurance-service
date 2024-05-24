@@ -15,12 +15,12 @@ class AssetDtoMapper : Mapper<Asset, AssetDto> {
         rating = input.rating!!,
         active = input.active!!,
         tokenizationPlatform = input.tokenizationPlatform!!,
-        remainingSupply = input.remainingSupply,
         totalSupply = input.totalSupply!!,
         totalValue = input.totalValue(),
         price = input.price!!,
         dueDate = input.dueDate!!,
+        insuranceTokenAddress = input.insuranceTokenAddress!!,
         createdAt = input.createdAt,
         updatedAt = input.updatedAt,
-    )
+    ).remainingSupply(input.remainingSupply ?: 0L)
 }

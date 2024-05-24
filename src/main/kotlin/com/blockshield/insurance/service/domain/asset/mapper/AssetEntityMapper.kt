@@ -22,6 +22,7 @@ class AssetEntityMapper : Mapper<AssetDto, Asset> {
             this.tokenizationPlatform = input.tokenizationPlatform
             this.totalSupply = input.totalSupply
             this.dueDate = input.dueDate
+            this.insuranceTokenAddress = input.insuranceTokenAddress
             this.createdAt = input.createdAt ?: this.createdAt
             this.updatedAt = input.updatedAt ?: this.updatedAt
         } ?: Asset().apply {
@@ -37,6 +38,7 @@ class AssetEntityMapper : Mapper<AssetDto, Asset> {
             this.tokenizationPlatform = input.tokenizationPlatform
             this.totalSupply = input.totalSupply
             this.dueDate = input.dueDate
+            this.tokenizationPlatform = input.tokenizationPlatform
             this.createdAt = OffsetDateTime.now()
             this.updatedAt = OffsetDateTime.now()
         }
