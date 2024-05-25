@@ -28,7 +28,7 @@ data class AssetDto(
 
     fun remainingSupply(value: Long) = this.apply { this.remainingSupply = value }
 
-    fun getRemainingSupply() = this.remainingSupply
+    fun getRemainingSupply() = this.remainingSupply ?: MIN_REMAINING_VALUE
 
     fun updateRemainingSupply(quantity: Int) = this.apply {
         this.remainingSupply = quantity + (remainingSupply ?: MIN_REMAINING_VALUE)

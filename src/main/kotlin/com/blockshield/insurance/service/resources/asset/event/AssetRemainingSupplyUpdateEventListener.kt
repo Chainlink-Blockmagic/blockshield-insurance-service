@@ -14,15 +14,17 @@ class AssetRemainingSupplyUpdateEventListener(private val assetService: AssetSer
     fun consume(event: Transaction) {
         event.assetTransaction?.let { assetTransaction ->
             assetService.get(assetTransaction.id)
-                .updateRemainingSupply(assetTransaction.quantity)
                 .let {
-                    assetService.update(assetTransaction.id, it)
+                    assetService.update(
+                        assetTransaction.id,
+                        it.updateRemainingSupply(assetTransaction.quantity)
+                    )
                 }
                 .also {
                     logger.info(
                         """
                         Updated asset remaining supply with quantity [ ${assetTransaction.quantity} ] 
-                            and for id [ ${assetTransaction.id} ] successfully!
+                        for id [ ${assetTransaction.id} ] successfully!
                     """.trimIndent()
                     )
                 }

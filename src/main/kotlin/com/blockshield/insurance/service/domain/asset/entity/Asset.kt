@@ -57,7 +57,7 @@ class Asset : Serializable {
 
     @NotNull
     @Indexed
-    var insuranceTokenAddress: String? = null
+    var insuranceTokenAddress: String? = ""
 
     @CreatedDate
     var createdAt: OffsetDateTime? = null
