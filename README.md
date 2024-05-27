@@ -60,9 +60,14 @@ curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.co
 curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/assets/ab9b9a10-a868-4f41-86d7-bbcb640e163f'
 ```
 
-### Validating if Asset Is Settled
+### Validating if Asset Is Settled by Symbol
 ```shell
 curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/assets/PRECATORIO2024/settled'
+```
+
+### Validating if Asset Is Settled by Address
+```shell
+curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.com/api/v1/assets/address/0xE5435Db2b26a59083788cA861e7f86CF7338CF64/settled'
 ```
 
 ### Inactivate Assets

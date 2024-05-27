@@ -32,6 +32,10 @@ class AssetService(private val assetRepository: AssetRepository) {
         .orElseThrow { NotFoundException("Asset for symbol [ $symbol ] does not exists!") }
         .let { dtoMapper.mapFrom(it, ASSET_NULL) }
 
+    fun getByAddress(address: String): AssetDto = assetRepository.findByInsuranceTokenAddress(address)
+        .orElseThrow { NotFoundException("Asset for address [ $address ] does not exists!") }
+        .let { dtoMapper.mapFrom(it, ASSET_NULL) }
+
     fun inactivate(id: UUID) = assetRepository.findById(id)
         .orElseThrow { NotFoundException("Asset for $id does not exists!") }
         .let {

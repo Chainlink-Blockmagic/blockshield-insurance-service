@@ -51,9 +51,17 @@ class AssetResource(
         ResponseEntity.ok(assetService.get(id))
 
     @GetMapping("/{symbol}/settled")
-    fun getAssetById(@PathVariable(name = "symbol") symbol: String): ResponseEntity<AssetActiveValidateResponse> =
+    fun getAssetBySymbol(@PathVariable(name = "symbol") symbol: String): ResponseEntity<AssetActiveValidateResponse> =
         ResponseEntity.ok(
             AssetActiveValidateResponse(assetService.getBySymbol(symbol.uppercase()).isSettled())
+        )
+
+    @GetMapping("/address/{address}/settled")
+    fun getAssetByAddress(@PathVariable(name = "address") address: String): ResponseEntity<AssetActiveValidateResponse> =
+        ResponseEntity.ok(
+            AssetActiveValidateResponse(
+                assetService.getByAddress(address).isSettled()
+            )
         )
 
     @GetMapping("/wallet/{wallet}")
