@@ -89,6 +89,7 @@ curl --location 'https://blockshield-insurance-service-d541038b7771.herokuapp.co
     "tokenizationPlatform": "MB",
     "active": true,
     "totalSupply": 1000000,
+    "insuranceTokenAddress": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
     "price": {
         "unitaryValue": 100.00,
         "yield": "15",
